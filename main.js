@@ -123,8 +123,48 @@ function fetchClima() {
 
 fetchClima();
 setInterval(fetchClima, 60000); // 1 minuto
+function carregarEventos() {
+  const planilhaID = "1YGlLGLG7OcSLJ9ly9a9mkvydP3rfvwTrk9AXxYsKhsU";
+  const abaNome = "Página1"; // ou "Sheet1" se estiver em inglês
+  const url = `https://opensheet.elk.sh/${planilhaID}/${abaNome}`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      const hoje = new Date();
+      const eventosFuturos = data
+        .filter(e => {
+          const partes = e.DATA.split("/");
+          const dataEvento = new Date(`${partes[2]}-${partes[1]}-${partes[0]}`);
+          return dataEvento >= hoje;
+        })
+        .sort((a, b) => {
+          const da = a.DATA.split("/").reverse().join("-");
+          const db = b.DATA.split("/").reverse().join("-");
+          return new Date(da) - new Date(db);
+        });
+
+      const lista = document.getElementById("eventosList");
+      lista.innerHTML = "";
+
+      if (eventosFuturos.length === 0) {
+        lista.innerHTML = "<li>Sem eventos futuros cadastrados.</li>";
+        return;
+      }
+
+      eventosFuturos.forEach(evento => {
+        const li = document.createElement("li");
+        li.textContent = `${evento.DATA} – ${evento.EVENTO}`;
+        lista.appendChild(li);
+      });
+    })
+    .catch(err => {
+      document.getElementById("eventosList").innerHTML = "Erro ao carregar eventos.";
+      console.error("Erro ao buscar eventos:", err);
+    });
+}
+
+// E depois chame a função assim que carregar a página:
+carregarEventos();
 
 
-// ⏱️ Inicia leitura periódica
-fetchClima();
-setInterval(fetchClima, 5000);
