@@ -1,71 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RBIM Tour Virtual – Estádio Almeidão</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RBIM – Estádio Almeidão</title>
+  <link href="style.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="dark-mode">
-  <header>
-    <h1>RBIM Tour Virtual – Estádio Almeidão</h1>
-    <h2>Visualização 3D + Indicadores Técnicos em Tempo Real</h2>
+<body class="bg-gray-900 text-white">
+
+  <header class="text-center p-6 bg-gray-800">
+    <h1 class="text-3xl font-bold text-cyan-300">RBIM Tour Virtual – Estádio Almeidão</h1>
+    <p class="text-lg text-gray-300">Visualização 3D + Indicadores Técnicos em Tempo Real</p>
   </header>
 
-  <main>
-    <!-- Tour Virtual -->
-    <section class="tour">
-      <h3>Tour Virtual 3D (Matterport)</h3>
+  <main class="p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+    <!-- TOUR -->
+    <section class="col-span-1 md:col-span-3">
+      <h3 class="text-xl font-semibold mb-2">Tour Virtual 3D (Matterport)</h3>
       <iframe src="https://my.matterport.com/show/?m=66PWbTSWo6E" width="100%" height="480" frameborder="0" allowfullscreen></iframe>
     </section>
 
-    <!-- Gráficos Dinâmicos -->
-    <section class="dashboard">
-      <div class="card">
-        <h4>Temperatura em Tempo Real (°C)</h4>
-        <canvas id="tempChart"></canvas>
-      </div>
+    <!-- GRÁFICOS -->
+    <div class="bg-gray-800 p-4 rounded shadow">
+      <h4 class="text-cyan-300 mb-2">Temperatura em Tempo Real (°C)</h4>
+      <canvas id="tempChart"></canvas>
+    </div>
 
-      <div class="card">
-        <h4>Velocidade do Vento (km/h)</h4>
-        <canvas id="ventoChart"></canvas>
-      </div>
+    <div class="bg-gray-800 p-4 rounded shadow">
+      <h4 class="text-cyan-300 mb-2">Velocidade do Vento (km/h)</h4>
+      <canvas id="ventoChart"></canvas>
+    </div>
 
-      <div class="card">
-        <h4>Índice de Público por Setor</h4>
-        <canvas id="publicoChart"></canvas>
-      </div>
+    <div class="bg-gray-800 p-4 rounded shadow">
+      <h4 class="text-cyan-300 mb-2">Índice de Público por Setor</h4>
+      <canvas id="publicoChart"></canvas>
+    </div>
 
-      <div class="card alerta">
-        <h4>Alerta de Manutenção</h4>
-        <p>Refletores da ala norte e drenagem do gramado precisam de inspeção técnica.</p>
-      </div>
-    </section>
+    <div class="bg-red-900 p-4 rounded col-span-1 md:col-span-3 shadow">
+      <h4 class="text-cyan-300 font-bold">Alerta de Manutenção</h4>
+      <p>Refletores da ala norte e drenagem do gramado precisam de inspeção técnica.</p>
+    </div>
 
-    <!-- Eventos no Estádio -->
-    <section class="eventos">
-      <div class="card">
-        <h4>Próximos Jogos no Almeidão</h4>
-        <ul>
-          <li>📅 04/05 — Guarani x Botafogo-PB – 19h00</li>
-          <li>📅 11/05 — Botafogo-PB x Floresta – 16h30</li>
-          <li>📅 18/05 — Maringá x Botafogo-PB – 16h30</li>
-          <li>📅 21/05 — Flamengo x Botafogo-PB – 21h30</li>
-          <li>📅 25/05 — Botafogo-PB x Retrô FC – 19h00</li>
-        </ul>
-        <p><small>Fonte: <a href="https://www.placardefutebol.com.br/time/botafogo-pb/proximos-jogos" target="_blank">placardefutebol.com.br</a></small></p>
-      </div>
-    </section>
+    <!-- EVENTOS -->
+    <div class="bg-gray-800 p-4 rounded col-span-1 md:col-span-3 shadow">
+      <h4 class="text-lg font-medium text-cyan-300 mb-2">Próximos Jogos no Almeidão</h4>
+      <ul class="list-disc ml-6 space-y-1">
+        <li>📅 04/05 – Guarani x Botafogo-PB – 19h00</li>
+        <li>📅 11/05 – Botafogo-PB x Floresta – 16h30</li>
+        <li>📅 18/05 – Maringá x Botafogo-PB – 16h30</li>
+        <li>📅 21/05 – Flamengo x Botafogo-PB – 21h30</li>
+        <li>📅 25/05 – Botafogo-PB x Retrô FC – 19h00</li>
+      </ul>
+      <p class="mt-2 text-sm">Fonte: <a href="https://www.placardefutebol.com.br/time/botafogo-pb/proximos-jogos" target="_blank" class="underline text-blue-400">placardefutebol.com.br</a></p>
+    </div>
   </main>
 
-  <footer>
-    <p>© 2025 RBIM Consultoria – Gêmeo Digital do Almeidão</p>
+  <footer class="text-center text-sm text-gray-400 p-4 mt-6 border-t border-gray-700">
+    © 2025 RBIM Consultoria – Gêmeo Digital do Almeidão
   </footer>
 
-  <!-- JavaScript principal -->
-  <script src="main.js"></script>
-</body>
-</html>
-
+  <script src
 
