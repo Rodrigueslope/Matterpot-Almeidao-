@@ -1,4 +1,5 @@
 // RBIM - Monitoramento em Tempo Real - Estádio Almeidão (João Pessoa-PB)
+
 const tempData = {
   labels: [],
   datasets: [{
@@ -7,7 +8,7 @@ const tempData = {
     borderColor: '#e63946',
     backgroundColor: 'rgba(230, 57, 70, 0.2)',
     fill: true,
-    tension: 0.3
+    tension: 0.4
   }]
 };
 
@@ -19,7 +20,7 @@ const ventoData = {
     borderColor: '#1d3557',
     backgroundColor: 'rgba(29, 53, 87, 0.2)',
     fill: true,
-    tension: 0.3
+    tension: 0.4
   }]
 };
 
@@ -35,13 +36,25 @@ const publicoData = {
 const tempChart = new Chart(document.getElementById('tempChart'), {
   type: 'line',
   data: tempData,
-  options: { responsive: true }
+  options: {
+    responsive: true,
+    animation: { duration: 500 },
+    scales: {
+      y: { beginAtZero: true, max: 45 }
+    }
+  }
 });
 
 const ventoChart = new Chart(document.getElementById('ventoChart'), {
   type: 'line',
   data: ventoData,
-  options: { responsive: true }
+  options: {
+    responsive: true,
+    animation: { duration: 500 },
+    scales: {
+      y: { beginAtZero: true, max: 30 }
+    }
+  }
 });
 
 const publicoChart = new Chart(document.getElementById('publicoChart'), {
@@ -56,6 +69,7 @@ function fetchClima() {
     .then(data => {
       const hora = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
+      // Mantém somente os 8 últimos pontos
       if (tempData.labels.length >= 8) {
         tempData.labels.shift();
         tempData.datasets[0].data.shift();
@@ -72,6 +86,12 @@ function fetchClima() {
       tempChart.update();
       ventoChart.update();
     });
+}
+
+// Inicial e repetição
+fetchClima();
+setInterval(fetchClima, 5000);
+
 }
 
 fetchClima();
