@@ -125,7 +125,7 @@ fetchClima();
 setInterval(fetchClima, 60000); // 1 minuto
 function carregarEventos() {
   const planilhaID = "1YGlLGLG7OcSLJ9ly9a9mkvydP3rfvwTrk9AXxYsKhsU";
-  const abaNome = "Página1"; // ou "Sheet1" se estiver em inglês
+  const abaNome = "EventosAlmeidao"; // ou "Sheet1" se estiver em inglês
   const url = `https://opensheet.elk.sh/${planilhaID}/${abaNome}`;
 
   fetch(url)
