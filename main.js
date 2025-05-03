@@ -1,4 +1,4 @@
-// RBIM - Monitoramento em Tempo Real - Estádio Almeidão (João Pessoa-PB)
+// RBIM - Gêmeo Digital do Estádio Almeidão
 
 const tempData = {
   labels: [],
@@ -58,15 +58,22 @@ const ventoChart = new Chart(document.getElementById('ventoChart'), {
 const publicoChart = new Chart(document.getElementById('publicoChart'), {
   type: 'doughnut',
   data: publicoData,
-  options: { responsive: true }
+  options: {
+    responsive: true
+  }
 });
 
 function fetchClima() {
   fetch('https://api.openweathermap.org/data/2.5/weather?q=Joao%20Pessoa,BR&units=metric&appid=d9da98b35660b007a19706897feaa7416')
     .then(res => res.json())
     .then(data => {
-      const hora = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      const hora = new Date().toLocaleTimeString('pt-BR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
 
+      // Mantém no máximo 8 pontos
       if (tempData.labels.length >= 8) {
         tempData.labels.shift();
         tempData.datasets[0].data.shift();
@@ -74,6 +81,7 @@ function fetchClima() {
         ventoData.datasets[0].data.shift();
       }
 
+      // Adiciona novo ponto
       tempData.labels.push(hora);
       tempData.datasets[0].data.push(data.main.temp);
 
@@ -82,12 +90,10 @@ function fetchClima() {
 
       tempChart.update();
       ventoChart.update();
-    });
+    })
+    .catch(err => console.error('Erro ao buscar clima:', err));
 }
 
+// Inicia
 fetchClima();
 setInterval(fetchClima, 5000);
-  })
-  .catch(error => {
-    console.error('Erro ao buscar dados climáticos:', error);
-  });
