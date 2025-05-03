@@ -1,4 +1,4 @@
-// RBIM - Gêmeo Digital do Estádio Almeidão
+// RBIM – Gêmeo Digital do Estádio Almeidão (João Pessoa - PB)
 
 const tempData = {
   labels: [],
@@ -63,8 +63,9 @@ const publicoChart = new Chart(document.getElementById('publicoChart'), {
   }
 });
 
+// 🔄 Função com Open-Meteo (sem chave, sem CORS)
 function fetchClima() {
-  fetch('https://api.openweathermap.org/data/2.5/weather?q=Joao%20Pessoa,BR&units=metric&appid=d9da98b35660b007a19706897feaa7416')
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=-7.12&longitude=-34.88&current=temperature_2m,wind_speed_10m')
     .then(res => res.json())
     .then(data => {
       const hora = new Date().toLocaleTimeString('pt-BR', {
@@ -73,7 +74,9 @@ function fetchClima() {
         second: '2-digit'
       });
 
-      // Mantém no máximo 8 pontos
+      const temp = data.current.temperature_2m;
+      const vento = data.current.wind_speed_10m;
+
       if (tempData.labels.length >= 8) {
         tempData.labels.shift();
         tempData.datasets[0].data.shift();
@@ -81,12 +84,11 @@ function fetchClima() {
         ventoData.datasets[0].data.shift();
       }
 
-      // Adiciona novo ponto
       tempData.labels.push(hora);
-      tempData.datasets[0].data.push(data.main.temp);
+      tempData.datasets[0].data.push(temp);
 
       ventoData.labels.push(hora);
-      ventoData.datasets[0].data.push(data.wind.speed);
+      ventoData.datasets[0].data.push(vento);
 
       tempChart.update();
       ventoChart.update();
@@ -94,6 +96,6 @@ function fetchClima() {
     .catch(err => console.error('Erro ao buscar clima:', err));
 }
 
-// Inicia
+// ⏱️ Inicia leitura periódica
 fetchClima();
 setInterval(fetchClima, 5000);
