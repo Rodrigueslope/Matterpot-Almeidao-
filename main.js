@@ -1,4 +1,4 @@
-// RBIM – Gêmeo Digital do Estádio Almeidão (João Pessoa - PB)
+// RBIM – Gêmeo Digital do Estádio Almeidão
 
 const tempData = {
   labels: [],
@@ -63,9 +63,30 @@ const publicoChart = new Chart(document.getElementById('publicoChart'), {
   }
 });
 
-// 🔄 Função com Open-Meteo (sem chave, sem CORS)
+let historicoTemperatura = [];
+let historicoVento = [];
+
+function calcularMedia(lista) {
+  const soma = lista.reduce((acc, val) => acc + val, 0);
+  return (soma / lista.length).toFixed(1);
+}
+
+function atualizarMedia() {
+  const mediaTemp = calcularMedia(historicoTemperatura);
+  const mediaVento = calcularMedia(historicoVento);
+
+  document.getElementById('mediaTemp').textContent = `Média Temp: ${mediaTemp} °C`;
+  document.getElementById('mediaVento').textContent = `Média Vento: ${mediaVento} km/h`;
+}
+
+function resetarHistorico() {
+  historicoTemperatura = [];
+  historicoVento = [];
+  atualizarMedia();
+}
+
 function fetchClima() {
-  fetch('https://api.open-meteo.com/v1/forecast?latitude=-7.12&longitude=-34.88&current=temperature_2m,wind_speed_10m')
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=-7.12&longitude=-34.86&current=temperature_2m,wind_speed_10m')
     .then(res => res.json())
     .then(data => {
       const hora = new Date().toLocaleTimeString('pt-BR', {
@@ -74,7 +95,7 @@ function fetchClima() {
         second: '2-digit'
       });
 
-      const temp = data.current.temperature_2m;
+      const temperatura = data.current.temperature_2m;
       const vento = data.current.wind_speed_10m;
 
       if (tempData.labels.length >= 8) {
@@ -85,16 +106,24 @@ function fetchClima() {
       }
 
       tempData.labels.push(hora);
-      tempData.datasets[0].data.push(temp);
+      tempData.datasets[0].data.push(temperatura);
 
       ventoData.labels.push(hora);
       ventoData.datasets[0].data.push(vento);
 
+      historicoTemperatura.push(temperatura);
+      historicoVento.push(vento);
+
       tempChart.update();
       ventoChart.update();
+      atualizarMedia();
     })
     .catch(err => console.error('Erro ao buscar clima:', err));
 }
+
+fetchClima();
+setInterval(fetchClima, 60000); // 1 minuto
+
 
 // ⏱️ Inicia leitura periódica
 fetchClima();
