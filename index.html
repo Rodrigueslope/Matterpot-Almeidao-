@@ -1,63 +1,54 @@
-<script>
-  // Open-Meteo API - João Pessoa (PB)
-  fetch('https://api.open-meteo.com/v1/forecast?latitude=-7.12&longitude=-34.86&current=temperature_2m,wind_speed_10m,relative_humidity_2m&timezone=America%2FSao_Paulo')
-    .then(response => response.json())
-    .then(data => {
-      const temp = data.current.temperature_2m;
-      const vento = data.current.wind_speed_10m;
-      const umidade = data.current.relative_humidity_2m;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RBIM – Estádio Almeidão</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 
-      // Temperatura
-      new Chart(document.getElementById('tempChart'), {
-        type: 'bar',
-        data: {
-          labels: ['Agora'],
-          datasets: [{
-            label: 'Temperatura (°C)',
-            data: [temp],
-            backgroundColor: '#e63946'
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: { y: { beginAtZero: true, max: 45 } }
-        }
-      });
+<body class="dark-mode">
+  <header>
+    <h1>RBIM Tour Virtual – Estádio Almeidão</h1>
+    <h2>Visualização 3D + Indicadores Técnicos em Tempo Real</h2>
+  </header>
 
-      // Vento
-      new Chart(document.getElementById('ventoChart'), {
-        type: 'bar',
-        data: {
-          labels: ['Agora'],
-          datasets: [{
-            label: 'Vento (km/h)',
-            data: [vento],
-            backgroundColor: '#1d3557'
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: { y: { beginAtZero: true, max: 30 } }
-        }
-      });
+  <main>
+    <section class="tour">
+      <h3>Tour Virtual 3D (Matterport)</h3>
+      <iframe src="https://my.matterport.com/show/?m=66PWbTSWo6E" width="100%" height="480" frameborder="0" allowfullscreen></iframe>
+    </section>
 
-      // Público simulado (mantido)
-      new Chart(document.getElementById('publicoChart'), {
-        type: 'doughnut',
-        data: {
-          labels: ['Norte', 'Sul', 'Leste', 'Oeste'],
-          datasets: [{
-            label: 'Público',
-            data: [3600, 2200, 3100, 4000],
-            backgroundColor: ['#457b9d', '#a8dadc', '#f4a261', '#e76f51']
-          }]
-        },
-        options: {
-          responsive: true
-        }
-      });
-    })
-    .catch(error => {
-      console.error('Erro ao buscar dados climáticos:', error);
-    });
-</script>
+    <section class="dashboard">
+      <div class="card">
+        <h4>Temperatura em Tempo Real (°C)</h4>
+        <canvas id="tempChart"></canvas>
+      </div>
+
+      <div class="card">
+        <h4>Velocidade do Vento (km/h)</h4>
+        <canvas id="ventoChart"></canvas>
+      </div>
+
+      <div class="card">
+        <h4>Índice de Público por Setor</h4>
+        <canvas id="publicoChart"></canvas>
+      </div>
+
+      <div class="card alerta">
+        <h4>Alerta de Manutenção</h4>
+        <p>Refletores da ala norte e drenagem do gramado precisam de inspeção técnica.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 RBIM Consultoria – Gêmeo Digital do Almeidão</p>
+  </footer>
+
+  <!-- JAVASCRIPT PRINCIPAL -->
+  <script src="main.js"></script>
+</body>
+</html>
+
