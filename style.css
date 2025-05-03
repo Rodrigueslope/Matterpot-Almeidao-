@@ -1,49 +1,75 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  padding: 0;
   background-color: #121212;
-  color: #f1f1f1;
+  color: #fff;
 }
 
-header, footer {
-  background-color: #1f1f1f;
-  color: #00ffff;
+header {
+  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+  color: #00f2ff;
   text-align: center;
-  padding: 1rem;
+  padding: 2rem 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
 main {
-  padding: 1rem;
+  padding: 2rem;
 }
 
-section.tour {
+.tour iframe {
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
   margin-bottom: 2rem;
 }
 
-section.dashboard {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
 }
 
 .card {
   background-color: #1e1e1e;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #00000066;
+  border-radius: 12px;
+  padding: 1.5rem;
+  flex: 1 1 280px;
+  max-width: 400px;
+  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 .card h4 {
-  color: #00ffff;
+  margin-top: 0;
+  color: #00f2ff;
+  border-bottom: 2px solid #00f2ff;
+  padding-bottom: 0.5rem;
 }
 
-.card.alerta {
+.alerta {
   background-color: #8b0000;
-  color: #ffffff;
+  color: #fff;
+  border-left: 5px solid #ff5f5f;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+footer {
+  background-color: #1a1a1a;
+  color: #00f2ff;
+  text-align: center;
+  padding: 1.2rem;
+  margin-top: 2rem;
+  border-top: 1px solid #333;
+  font-size: 0.9rem;
 }
 
 canvas {
   width: 100% !important;
-  height: 300px !important;
+  height: auto !important;
 }
+
