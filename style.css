@@ -1,112 +1,86 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matterport - Estádio Almeidão</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body class="dark-mode">
-  <header>
-    <img src="RBIM.png" alt="Logo RBIM" style="height: 60px; margin-bottom: 10px;">
-    <h1>RBIM Tour Virtual – Estádio Almeidão</h1>
-    <h2>Visualização 3D + Indicadores Técnicos em Tempo Real</h2>
-  </header>
+body.dark-mode {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
 
-  <main>
-    <!-- TOUR VIRTUAL INCORPORADO -->
-    <section class="tour">
-      <h3>Tour Virtual 3D (Matterport)</h3>
-      <iframe src="https://my.matterport.com/show/?m=66PWbTSWo6E" width="100%" height="480" frameborder="0" allowfullscreen></iframe>
-    </section>
+header {
+  background-color: #1f1f1f;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 2px solid #333;
+}
 
-    <!-- GRÁFICOS TÉCNICOS -->
-    <section class="dashboard">
-      <div class="card">
-        <h4>Temperatura em Tempo Real (°C)</h4>
-        <canvas id="tempChart"></canvas>
-      </div>
+header h1 {
+  font-size: 28px;
+  margin: 0;
+  color: #00d4ff;
+}
 
-      <div class="card">
-        <h4>Velocidade do Vento (km/h)</h4>
-        <canvas id="ventoChart"></canvas>
-      </div>
+header h2 {
+  font-size: 18px;
+  font-weight: 300;
+  margin-top: 5px;
+  color: #ccc;
+}
 
-      <div class="card">
-        <h4>Índice de Público por Setor</h4>
-        <canvas id="publicoChart"></canvas>
-      </div>
+main {
+  padding: 20px;
+}
 
-      <div class="card alerta">
-        <h4>Alerta de Manutenção</h4>
-        <p>Refletores da ala norte e drenagem do gramado precisam de inspeção técnica.</p>
-      </div>
-    </section>
-  </main>
+.tour iframe {
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
 
-  <footer>
-    <p>© 2025 RBIM Consultoria – Gêmeo Digital do Almeidão</p>
-  </footer>
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 30px;
+  gap: 20px;
+}
 
-  <script>
-    // API OpenWeather (João Pessoa, PB)
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=Joao%20Pessoa,BR&units=metric&appid=d9da98b35660b007a19706897feaa7416')
-      .then(response => response.json())
-      .then(data => {
-        const temperatura = data.main.temp;
-        const vento = data.wind.speed;
+.card {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  padding: 20px;
+  flex: 1 1 350px;
+  max-width: 500px;
+  min-height: 280px;
+}
 
-        // Temp
-        new Chart(document.getElementById('tempChart'), {
-          type: 'bar',
-          data: {
-            labels: ['Agora'],
-            datasets: [{
-              label: 'Temperatura Atual',
-              data: [temperatura],
-              backgroundColor: '#e63946'
-            }]
-          },
-          options: {
-            responsive: true,
-            scales: { y: { beginAtZero: true, max: 45 } }
-          }
-        });
+.card h4 {
+  margin-top: 0;
+  color: #00c9a7;
+  font-weight: 500;
+}
 
-        // Vento
-        new Chart(document.getElementById('ventoChart'), {
-          type: 'bar',
-          data: {
-            labels: ['Agora'],
-            datasets: [{
-              label: 'Vento (km/h)',
-              data: [vento],
-              backgroundColor: '#1d3557'
-            }]
-          },
-          options: {
-            responsive: true,
-            scales: { y: { beginAtZero: true, max: 30 } }
-          }
-        });
-      });
+.alerta {
+  border-left: 4px solid #ff4d4d;
+  background-color: #2a0000;
+}
 
-    // Público simulado
-    new Chart(document.getElementById('publicoChart'), {
-      type: 'doughnut',
-      data: {
-        labels: ['Norte', 'Sul', 'Leste', 'Oeste'],
-        datasets: [{
-          label: 'Público',
-          data: [3600, 2200, 3100, 4000],
-          backgroundColor: ['#457b9d', '#a8dadc', '#f4a261', '#e76f51']
-        }]
-      },
-      options: {
-        responsive: true
-      }
-    });
-  </script>
-</body>
-</html>
+footer {
+  background-color: #1f1f1f;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  color: #999;
+  border-top: 1px solid #333;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+  }
+}
+
