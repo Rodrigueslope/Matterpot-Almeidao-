@@ -1,32 +1,26 @@
-body.dark-mode {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #121212;
-  color: #f0f0f0;
-  margin: 0;
-  padding: 0;
+body {
+  font-family: system-ui, sans-serif;
 }
 
-header {
-  background-color: #1f1f1f;
-  padding: 20px;
-  text-align: center;
-  border-bottom: 2px solid #333;
+/* Exemplo de personalização adicional */
+.card canvas {
+  margin-top: 10px;
 }
 
-header h1 {
-  font-size: 28px;
-  margin: 0;
-  color: #00d4ff;
+/* Customizações específicas (caso necessário) */
+.alerta p {
+  font-weight: bold;
+  color: #f87171;
 }
 
-header h2 {
-  font-size: 18px;
-  font-weight: 300;
-  margin-top: 5px;
-  color: #ccc;
+/* Exemplo de media query manual, se quiser sobrepor Tailwind */
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+    gap: 16px;
+  }
 }
 
-main {
   padding: 20px;
 }
 
