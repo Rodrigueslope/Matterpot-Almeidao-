@@ -2,65 +2,52 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RBIM Tour Virtual – Estádio Almeidão</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RBIM – Estádio Almeidão</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="bg-gray-900 text-white">
-  <header class="text-center p-4">
-    <h1 class="text-3xl font-bold">RBIM Tour Virtual – Estádio Almeidão</h1>
-    <h2 class="text-xl mt-2">Visualização 3D + Indicadores Técnicos em Tempo Real</h2>
+
+<body class="dark-mode">
+  <header>
+    <h1>RBIM Tour Virtual – Estádio Almeidão</h1>
+    <h2>Visualização 3D + Indicadores Técnicos em Tempo Real</h2>
   </header>
 
-  <main class="p-4 space-y-6">
-    <!-- Tour Virtual -->
-    <section>
-      <h3 class="text-lg font-semibold mb-2">Tour Virtual 3D (Matterport)</h3>
+  <main>
+    <section class="tour">
+      <h3>Tour Virtual 3D (Matterport)</h3>
       <iframe src="https://my.matterport.com/show/?m=66PWbTSWo6E" width="100%" height="480" frameborder="0" allowfullscreen></iframe>
     </section>
 
-    <!-- Indicadores -->
-    <section class="grid md:grid-cols-3 gap-4">
-      <div class="bg-gray-800 p-4 rounded shadow">
-        <h4 class="text-cyan-300 font-semibold mb-2">Temperatura em Tempo Real (°C)</h4>
+    <section class="dashboard">
+      <div class="card">
+        <h4>Temperatura em Tempo Real (°C)</h4>
         <canvas id="tempChart"></canvas>
       </div>
-      <div class="bg-gray-800 p-4 rounded shadow">
-        <h4 class="text-cyan-300 font-semibold mb-2">Velocidade do Vento (km/h)</h4>
+
+      <div class="card">
+        <h4>Velocidade do Vento (km/h)</h4>
         <canvas id="ventoChart"></canvas>
       </div>
-      <div class="bg-gray-800 p-4 rounded shadow">
-        <h4 class="text-cyan-300 font-semibold mb-2">Índice de Público por Setor</h4>
+
+      <div class="card">
+        <h4>Índice de Público por Setor</h4>
         <canvas id="publicoChart"></canvas>
       </div>
-    </section>
 
-    <!-- Alerta -->
-    <section class="bg-red-800 text-white p-4 rounded shadow">
-      <h4 class="font-semibold">Alerta de Manutenção</h4>
-      <p>Refletores da ala norte e drenagem do gramado precisam de inspeção técnica.</p>
-    </section>
-
-    <!-- Próximos Jogos -->
-    <section class="bg-gray-800 p-4 rounded shadow md:col-span-3">
-      <h4 class="text-cyan-300 text-lg font-medium mb-2">Próximos Jogos no Almeidão</h4>
-      <ul class="list-disc pl-5">
-        <li>📅 04/05 – Guarani x Botafogo-PB – 19h00</li>
-        <li>📅 11/05 – Botafogo-PB x Floresta – 16h30</li>
-        <li>📅 18/05 – Maringá x Botafogo-PB – 16h30</li>
-        <li>📅 21/05 – Flamengo x Botafogo-PB – 21h30</li>
-        <li>📅 25/05 – Botafogo-PB x Retrô FC – 19h00</li>
-      </ul>
-      <p class="text-sm mt-2">Fonte: <a href="https://www.placardefutebol.com.br/time/botafogo-pb/proximos-jogos" class="underline text-blue-400" target="_blank">placardefutebol.com.br</a></p>
+      <div class="card alerta">
+        <h4>Alerta de Manutenção</h4>
+        <p>Refletores da ala norte e drenagem do gramado precisam de inspeção técnica.</p>
+      </div>
     </section>
   </main>
 
-  <footer class="bg-gray-800 text-center text-sm text-gray-400 p-4 border-t border-gray-700 mt-4">
-    © 2025 RBIM Consultoria – Gêmeo Digital do Almeidão
+  <footer>
+    <p>© 2025 RBIM Consultoria – Gêmeo Digital do Almeidão</p>
   </footer>
 
+  <!-- JAVASCRIPT PRINCIPAL -->
   <script src="main.js"></script>
 </body>
 </html>
