@@ -1,16 +1,26 @@
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  background-color: #121212;
-  color: #fff;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #ffffff;
 }
 
 header {
-  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
-  color: #00f2ff;
   text-align: center;
   padding: 2rem 1rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  background: linear-gradient(to right, #1a2980, #26d0ce);
+  color: #ffffff;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+header h2 {
+  font-size: 1.3rem;
+  font-weight: 400;
 }
 
 main {
@@ -18,58 +28,66 @@ main {
 }
 
 .tour iframe {
+  width: 100%;
+  height: 480px;
+  border: none;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
   margin-bottom: 2rem;
 }
 
 .dashboard {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
 }
 
 .card {
-  background-color: #1e1e1e;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
-  padding: 1.5rem;
-  flex: 1 1 280px;
-  max-width: 400px;
-  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  text-align: center;
+  backdrop-filter: blur(10px);
+  position: relative;
 }
 
 .card h4 {
-  margin-top: 0;
-  color: #00f2ff;
-  border-bottom: 2px solid #00f2ff;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid cyan;
   padding-bottom: 0.5rem;
-}
-
-.alerta {
-  background-color: #8b0000;
-  color: #fff;
-  border-left: 5px solid #ff5f5f;
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-}
-
-footer {
-  background-color: #1a1a1a;
-  color: #00f2ff;
-  text-align: center;
-  padding: 1.2rem;
-  margin-top: 2rem;
-  border-top: 1px solid #333;
-  font-size: 0.9rem;
+  color: cyan;
+  font-size: 1.2rem;
 }
 
 canvas {
-  width: 100% !important;
-  height: auto !important;
+  max-width: 100%;
 }
 
+.alerta {
+  background: rgba(255, 0, 0, 0.6);
+  color: white;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  background: #0f2027;
+  font-size: 0.9rem;
+  color: cyan;
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  header h2 {
+    font-size: 1rem;
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+}
