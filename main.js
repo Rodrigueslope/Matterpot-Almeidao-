@@ -14,7 +14,7 @@ const ventoData = {
   datasets: [{
     label: 'Vento (km/h)',
     data: [],
-    backgroundColor: '#1d3557'
+    backgroundColor: '#f4a261'
   }]
 };
 
