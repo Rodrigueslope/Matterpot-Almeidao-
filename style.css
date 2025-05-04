@@ -13,6 +13,9 @@ header {
 }
 
 h1, h2, h3, h4 {
+  h1, h2 {
+  color: #00ffff;
+}
   margin: 0.5rem 0;
 }
 
