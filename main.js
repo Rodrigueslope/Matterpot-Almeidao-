@@ -125,30 +125,19 @@ fetchClima();
 setInterval(fetchClima, 5000); // Atualiza a cada 5 segundos
 function carregarEventos() {
   const planilhaID = "1YGlLGLG7OcSLJ9ly9a9mkvydP3rfvwTrk9AXxYsKhsU";
-  const abaNome = "Eventos"; // ou "Sheet1" se estiver em inglês
+  const abaNome = "EventosAlmeidao"; // ou "Sheet1"
   const url = `https://opensheet.elk.sh/${planilhaID}/${abaNome}`;
 
   fetch(url)
     .then(res => res.json())
     .then(data => {
-  // Corrige os nomes das chaves com espaços extras
-  data = data.map(e => ({
-    DATA: e["DATA "]?.trim(), // remove espaço e protege se undefined
-    EVENTO: e["EVENTO"]?.trim()
-  }));
+      // Corrige nomes das chaves com espaços
+      data = data.map(e => ({
+        DATA: e["DATA "]?.trim(),
+        EVENTO: e["EVENTO"]?.trim()
+      }));
 
-  const hoje = new Date();
-  const eventosFuturos = data
-    .filter(e => {
-      const partes = e.DATA.split("/");
-      const dataEvento = new Date(`${partes[2]}-${partes[1]}-${partes[0]}`);
-      return dataEvento >= hoje;
-    })
-    .sort((a, b) => {
-      const da = a.DATA.split("/").reverse().join("-");
-      const db = b.DATA.split("/").reverse().join("-");
-      return new Date(da) - new Date(db);
-    });
+      const hoje = new Date();
       const eventosFuturos = data
         .filter(e => {
           const partes = e.DATA.split("/");
@@ -180,6 +169,7 @@ function carregarEventos() {
       console.error("Erro ao buscar eventos:", err);
     });
 }
+
 
 // E depois chame a função assim que carregar a página:
 carregarEventos();
