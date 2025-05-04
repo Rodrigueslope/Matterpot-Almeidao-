@@ -131,7 +131,24 @@ function carregarEventos() {
   fetch(url)
     .then(res => res.json())
     .then(data => {
-      const hoje = new Date();
+  // Corrige os nomes das chaves com espaços extras
+  data = data.map(e => ({
+    DATA: e["DATA "]?.trim(), // remove espaço e protege se undefined
+    EVENTO: e["EVENTO"]?.trim()
+  }));
+
+  const hoje = new Date();
+  const eventosFuturos = data
+    .filter(e => {
+      const partes = e.DATA.split("/");
+      const dataEvento = new Date(`${partes[2]}-${partes[1]}-${partes[0]}`);
+      return dataEvento >= hoje;
+    })
+    .sort((a, b) => {
+      const da = a.DATA.split("/").reverse().join("-");
+      const db = b.DATA.split("/").reverse().join("-");
+      return new Date(da) - new Date(db);
+    });
       const eventosFuturos = data
         .filter(e => {
           const partes = e.DATA.split("/");
