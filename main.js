@@ -125,7 +125,7 @@ fetchClima();
 setInterval(fetchClima, 5000); // Atualiza a cada 5 segundos
 function carregarEventos() {
   const planilhaID = "1YGlLGLG7OcSLJ9ly9a9mkvydP3rfvwTrk9AXxYsKhsU";
-  const abaNome = "Eventos Almeidão"; // ou "Sheet1" se estiver em inglês
+  const abaNome = "Eventos"; // ou "Sheet1" se estiver em inglês
   const url = `https://opensheet.elk.sh/${planilhaID}/${abaNome}`;
 
   fetch(url)
