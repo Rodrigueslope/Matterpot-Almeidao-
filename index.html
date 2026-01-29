@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>RBIM Tour Virtual – Estádio Almeidão</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -20,7 +20,16 @@
     <!-- TOUR VIRTUAL -->
     <section class="tour">
       <h3>Tour Virtual 3D (Matterport)</h3>
-      <iframe src="https://my.matterport.com/show/?m=66PWbTSWo6E" width="100%" height="480" frameborder="0" allowfullscreen></iframe>
+      <div class="iframe-container">
+        <iframe 
+          src="https://my.matterport.com/show/?m=66PWbTSWo6E&play=1&qs=1" 
+          frameborder="0" 
+          allowfullscreen 
+          allow="xr-spatial-tracking; gyroscope; accelerometer; fullscreen; autoplay; clipboard-write; encrypted-media"
+          loading="lazy"
+          title="Tour Virtual 3D do Estádio Almeidão">
+        </iframe>
+      </div>
     </section>
 
     <!-- DASHBOARD -->
@@ -56,5 +65,3 @@
   <script src="main.js"></script>
 </body>
 </html>
-
-
